@@ -1,5 +1,5 @@
 package edu.uark;
-//Hello, this is a comment!
+//Hi there everyone!
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
