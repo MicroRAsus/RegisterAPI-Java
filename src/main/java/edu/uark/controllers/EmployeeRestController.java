@@ -10,23 +10,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/*import edu.uark.commands.products.ProductByLookupCodeQuery;  //these needs to be modified after creating commands classes for employee table
-import edu.uark.commands.products.ProductCreateCommand;
-import edu.uark.commands.products.ProductDeleteCommand;
-import edu.uark.commands.products.ProductQuery;
-import edu.uark.commands.products.ProductUpdateCommand;
-import edu.uark.commands.products.ProductsQuery;*/
+import edu.uark.commands.employee.EmployeeCountQuery;
 import edu.uark.models.api.Employee;
+import edu.uark.models.api.EmployeeCount;
 
 @RestController
 @RequestMapping(value = "/api/employee")
 public class EmployeeRestController {
 //	@RequestMapping(value = "/", method = RequestMethod.POST)
-//	public Employee createEmployee(@RequestBody Employee employee) {
-//		return (new ProductCreateCommand()).
-//			setApiProduct(product).
+//	public Employee createEmployee(@RequestBody Employee employee) {  //2.5 create employee endpoint
+//		return (new EmployeeCreateCommand()).
+//			setApiEmployee(employee).
 //			execute();
 //	}
+	
+	@RequestMapping(value = "/EmployeeCount", method = RequestMethod.GET)  //2.4 task: check number of existing employee records
+	public EmployeeCount getEmployeeCount() {
+		return (new EmployeeCountQuery()).execute();
+	}
 	
 	
 /*	@RequestMapping(value = "/", method = RequestMethod.GET)

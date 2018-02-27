@@ -34,6 +34,11 @@ public class EmployeeRepository extends BaseRepository<EmployeeEntity> implement
 	}
 	
 	@Override
+	public int countEmployee() {
+		return this.count();
+	}
+	
+	@Override
 	public EmployeeEntity createOne() {
 		return new EmployeeEntity();
 	}

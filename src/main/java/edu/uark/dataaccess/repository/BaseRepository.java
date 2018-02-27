@@ -24,7 +24,7 @@ import edu.uark.dataaccess.repository.helpers.where.WhereClause;
 import edu.uark.dataaccess.repository.helpers.where.WhereContainer;
 
 public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRepositoryInterface<T> {
-	public int count() {
+	public int count() {  //default: count(*) from primary table
 		return countWhere(null, null);
 	}
 
@@ -414,7 +414,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 	private String fromAndWhereClause(JoinContainer[] joins, WhereContainer where, OrderByContainer[] orderBy, int limit, int offset) {
 		StringBuilder fromAndWhereClause = new StringBuilder().
 			append(" FROM ").
-			append(getPrimaryTableName());
+			append(getPrimaryTableName());  // always select the primary table
 
 		if ((joins != null) && (joins.length > 0)) {
 			for (JoinContainer joinTo : joins) {

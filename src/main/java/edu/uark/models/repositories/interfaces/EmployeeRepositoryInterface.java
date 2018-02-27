@@ -5,4 +5,5 @@ import edu.uark.models.entities.EmployeeEntity;
 
 public interface EmployeeRepositoryInterface extends BaseRepositoryInterface<EmployeeEntity> {
 	EmployeeEntity byEmployeeID(String employee_id);
+	int countEmployee();
 }
