@@ -17,18 +17,23 @@ import edu.uark.models.api.EmployeeCount;
 @RestController
 @RequestMapping(value = "/api/employee")
 public class EmployeeRestController {
+	@RequestMapping(value = "/EmployeeCount", method = RequestMethod.GET)  //2.4 task: check number of existing employee records - tested works
+	public EmployeeCount getEmployeeCount() {
+		return (new EmployeeCountQuery()).execute();
+	}
+	
 //	@RequestMapping(value = "/", method = RequestMethod.POST)
 //	public Employee createEmployee(@RequestBody Employee employee) {  //2.5 create employee endpoint
 //		return (new EmployeeCreateCommand()).
 //			setApiEmployee(employee).
 //			execute();
 //	}
-	
-	@RequestMapping(value = "/EmployeeCount", method = RequestMethod.GET)  //2.4 task: check number of existing employee records
-	public EmployeeCount getEmployeeCount() {
-		return (new EmployeeCountQuery()).execute();
+
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "Successful test. (EmployeeRestController)";
 	}
-	
 	
 /*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Product> getProducts() {
@@ -62,11 +67,5 @@ public class EmployeeRestController {
 		(new ProductDeleteCommand()).
 			setProductId(productId).
 			execute();
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		return "Successful test. (EmployeeRestController)";
 	}*/
 }
