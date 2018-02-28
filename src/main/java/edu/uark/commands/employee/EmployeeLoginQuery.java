@@ -24,7 +24,7 @@ public class EmployeeLoginQuery implements ResultCommandInterface<Employee> {
 				return new Employee(employeeEntity);
 			}
 			else {
-				throw new PassWordNotMatchException("Password");
+				throw new PassWordNotMatchException("Password " + employeeEntity.getPassWord() + "and" + this.password);
 			}
 		} else {
 			throw new NotFoundException("Employee ID " + this.employee_id);
