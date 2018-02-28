@@ -1,5 +1,6 @@
 package edu.uark.commands.employee;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import edu.uark.commands.ResultCommandInterface;
 import edu.uark.controllers.exceptions.NotFoundException;
 import edu.uark.controllers.exceptions.PassWordNotMatchException;
@@ -14,11 +15,11 @@ public class EmployeeLoginQuery implements ResultCommandInterface<Employee> {
 	public Employee execute() {
 		EmployeeEntity employeeEntity = this.employeeRepository.byEmployeeID(this.employeeLoginINFO.getEmployeeID());
 		if (employeeEntity != null) {
-			if(employeeEntity.getPassWord().equals(this.employeeLoginINFO.getPassWord())) {  //TODO this.employeeLoginINFO.password need to be hashed here
+			if(employeeEntity.getPassWord().equals(DigestUtils.sha1Hex(this.employeeLoginINFO.getPassWord()))) {
 				return new Employee(employeeEntity);
 			}
 			else {
-				throw new PassWordNotMatchException("Password");
+				throw new PassWordNotMatchException("Password" + DigestUtils.sha1Hex(this.employeeLoginINFO.getPassWord()));
 			}
 		} else {
 			throw new NotFoundException("Employee ID " + this.employeeLoginINFO.getEmployeeID());
