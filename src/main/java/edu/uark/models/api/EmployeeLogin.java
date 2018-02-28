@@ -1,14 +1,14 @@
 package edu.uark.models.api;
 
 public class EmployeeLogin {
-	private String employee_id;
+	private String employeeID;
 	private String password;
 	
 	public String getEmployeeID() {
-		return this.employee_id;
+		return this.employeeID;
 	}
-	public EmployeeLogin setEmployeeID(String employee_id) {
-		this.employee_id = employee_id;
+	public EmployeeLogin setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
 		return this;
 	}
 	
@@ -21,12 +21,12 @@ public class EmployeeLogin {
 	}
 	
 	public EmployeeLogin() {
-		this.employee_id = "";
+		this.employeeID = "";
 		this.password = "";
 	}
 	
-	public EmployeeLogin(String employee_id, String password) {
-		this.employee_id = employee_id;
+	public EmployeeLogin(String employeeID, String password) {
+		this.employeeID = employeeID;
 		this.password = password;
 	}
 }

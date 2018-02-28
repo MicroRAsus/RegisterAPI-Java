@@ -1,10 +1,10 @@
 package edu.uark.commands.employee;
 
-//import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.commands.ResultCommandInterface;
 import edu.uark.controllers.exceptions.NotFoundException;
-//import edu.uark.controllers.exceptions.UnprocessableEntityException;
+import edu.uark.controllers.exceptions.UnprocessableEntityException;
 import edu.uark.controllers.exceptions.PassWordNotMatchException;
 import edu.uark.models.api.Employee;
 import edu.uark.models.entities.EmployeeEntity;
@@ -14,9 +14,9 @@ import edu.uark.models.repositories.interfaces.EmployeeRepositoryInterface;
 public class EmployeeLoginQuery implements ResultCommandInterface<Employee> {
 	@Override
 	public Employee execute() {
-//		if (StringUtils.isBlank(this.employee_id)) {
-//			throw new UnprocessableEntityException("employee_id");
-//		}
+		if (StringUtils.isBlank(this.employee_id)) {
+			throw new UnprocessableEntityException("employee_id");
+		}
 		
 		EmployeeEntity employeeEntity = this.employeeRepository.byEmployeeID(this.employee_id);
 		if (employeeEntity != null) {
