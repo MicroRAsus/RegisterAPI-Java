@@ -27,8 +27,7 @@ public class EmployeeRestController {
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public Employee verifyEmployeeLogin(@RequestBody EmployeeLogin employeeLoginINFO) {
 		return (new EmployeeLoginQuery()).
-				setEmployeeID(employeeLoginINFO.getEmployeeID()).
-				setPassWord(employeeLoginINFO.getPassWord()).
+				setEmployeeLogin(employeeLoginINFO).
 				execute();
 	}
 	
