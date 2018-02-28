@@ -14,11 +14,11 @@ public class EmployeeLoginQuery implements ResultCommandInterface<Employee> {
 	public Employee execute() {
 		EmployeeEntity employeeEntity = this.employeeRepository.byEmployeeID(this.employeeLoginINFO.getEmployeeID());
 		if (employeeEntity != null) {
-			if(employeeEntity.getPassWord() == this.employeeLoginINFO.getPassWord()) {  //TODO this.employeeLoginINFO.password need to be hashed here
+			if(employeeEntity.getPassWord().equals(this.employeeLoginINFO.getPassWord())) {  //TODO this.employeeLoginINFO.password need to be hashed here
 				return new Employee(employeeEntity);
 			}
 			else {
-				throw new PassWordNotMatchException("Password " + employeeEntity.getPassWord() + " and " + this.employeeLoginINFO.getPassWord());
+				throw new PassWordNotMatchException("Password");
 			}
 		} else {
 			throw new NotFoundException("Employee ID " + this.employeeLoginINFO.getEmployeeID());
