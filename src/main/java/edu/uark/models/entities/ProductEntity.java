@@ -19,7 +19,7 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	}
 
 	@Override
-	protected Map<String, Object> fillRecord(Map<String, Object> record) {
+	protected Map<String, Object> fillRecord(Map<String, Object> record) { //put data into record to be updated
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
 		record.put(ProductFieldNames.COUNT, this.count);
 		

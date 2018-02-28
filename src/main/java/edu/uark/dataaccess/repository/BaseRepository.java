@@ -188,7 +188,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 	}
 
 	private T selectFirstOrDefault(String query, UnaryOperator<PreparedStatement> setArgsOperator) {
-		T model = null;
+		T model = null; //null would not change if no record found, so if nothing found, returned entity is null and use it to throw exceptions
 
 		try (Connection connection = DatabaseAccessor.getDatabaseConnection()) {
 			PreparedStatement ps = connection.prepareStatement(query);

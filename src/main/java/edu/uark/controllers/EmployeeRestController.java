@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uark.commands.employee.EmployeeCountQuery;
+import edu.uark.commands.employee.EmployeeLoginQuery;
 import edu.uark.models.api.Employee;
 import edu.uark.models.api.EmployeeCount;
+import edu.uark.models.api.EmployeeLogin;
 
 @RestController
 @RequestMapping(value = "/api/employee")
@@ -20,6 +22,14 @@ public class EmployeeRestController {
 	@RequestMapping(value = "/EmployeeCount", method = RequestMethod.GET)  //2.4 task: check number of existing employee records - tested works
 	public EmployeeCount getEmployeeCount() {
 		return (new EmployeeCountQuery()).execute();
+	}
+	
+	@RequestMapping(value = "/Login", method = RequestMethod.POST)
+	public Employee verifyEmployeeLogin(@RequestBody EmployeeLogin employeeLoginINFO) {
+		return (new EmployeeLoginQuery()).
+				setEmployeeID(employeeLoginINFO.getEmployeeID()).
+				setPassWord(employeeLoginINFO.getPassWord()).
+				execute();
 	}
 	
 //	@RequestMapping(value = "/", method = RequestMethod.POST)
