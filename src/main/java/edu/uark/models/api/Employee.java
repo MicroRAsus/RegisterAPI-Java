@@ -6,37 +6,37 @@ import java.util.UUID;
 import edu.uark.models.entities.EmployeeEntity;
 
 public class Employee {
-	private String first_name;
-	private String last_name;
-	private String employee_id;
+	private String firstName;
+	private String lastName;
+	private String employeeID;
 	private String active;
 	private String role;
 	private String manager;
-	private String password;
+	private String passWord;
 	private UUID id;
 	private LocalDateTime createdOn;
 	
 	public String getFirstName() {
-		return this.first_name;
+		return this.firstName;
 	}
 	public Employee setFirstName(String first_name) {
-		this.first_name = first_name;
+		this.firstName = first_name;
 		return this;
 	}
 
 	public String getLastName() {
-		return this.last_name;
+		return this.lastName;
 	}
 	public Employee setLastName(String last_name) {
-		this.last_name = last_name;
+		this.lastName = last_name;
 		return this;
 	}
 
 	public String getEmployeeID() {
-		return this.employee_id;
+		return this.employeeID;
 	}
 	public Employee setEmployeeID(String employee_id) {
-		this.employee_id = employee_id;
+		this.employeeID = employee_id;
 		return this;
 	}
 
@@ -65,10 +65,10 @@ public class Employee {
 	}
 
 	public String getPassWord() {
-		return this.password;
+		return this.passWord;
 	}
 	public Employee setPassWord(String password) {
-		this.password = password;
+		this.passWord = password;
 		return this;
 	}
 
@@ -89,25 +89,25 @@ public class Employee {
 	}
 
 	public Employee() {
-		this.first_name = "";
-		this.last_name = "";
-		this.employee_id = "";
+		this.firstName = "";
+		this.lastName = "";
+		this.employeeID = "";
 		this.active = "";
 		this.role = "";
 		this.manager = "";
-		this.password = "";
+		this.passWord = "";
 		this.id = new UUID(0, 0);
 		this.createdOn = LocalDateTime.now();
 	}
 
 	public Employee(EmployeeEntity employeeEntity) { //Copy constructor
-		this.first_name = employeeEntity.getFirstName();
-		this.last_name = employeeEntity.getLastName();
-		this.employee_id = employeeEntity.getEmployeeID();
+		this.firstName = employeeEntity.getFirstName();
+		this.lastName = employeeEntity.getLastName();
+		this.employeeID = employeeEntity.getEmployeeID();
 		this.active = employeeEntity.getActive();
 		this.role = employeeEntity.getRole();
 		this.manager = employeeEntity.getManager();
-		this.password = employeeEntity.getPassWord();
+		this.passWord = employeeEntity.getPassWord();
 		this.id = employeeEntity.getId();
 		this.createdOn = employeeEntity.getCreatedOn();
 	}

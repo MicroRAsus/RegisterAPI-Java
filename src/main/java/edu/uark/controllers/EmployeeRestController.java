@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.uark.commands.employee.EmployeeCountQuery;
 import edu.uark.commands.employee.EmployeeLoginQuery;
+import edu.uark.commands.employee.EmployeeCreateCommand;
 import edu.uark.models.api.Employee;
 import edu.uark.models.api.EmployeeCount;
 import edu.uark.models.api.EmployeeLogin;
@@ -25,56 +26,22 @@ public class EmployeeRestController {
 	}
 	
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public Employee verifyEmployeeLogin(@RequestBody EmployeeLogin employeeLoginINFO) {
+	public Employee verifyEmployeeLogin(@RequestBody EmployeeLogin employeeLoginINFO) { //2.3
 		return (new EmployeeLoginQuery()).
 				setEmployeeLogin(employeeLoginINFO).
 				execute();
 	}
 	
-//	@RequestMapping(value = "/", method = RequestMethod.POST)
-//	public Employee createEmployee(@RequestBody Employee employee) {  //2.5 create employee endpoint
-//		return (new EmployeeCreateCommand()).
-//			setApiEmployee(employee).
-//			execute();
-//	}
+	@RequestMapping(value = "/EmployeeCreate", method = RequestMethod.POST)
+	public Employee createEmployee(@RequestBody Employee employee) {  //2.5 create employee endpoint
+		return (new EmployeeCreateCommand()).
+			setEmployee(employee).
+			execute();
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "Successful test. (EmployeeRestController)";
 	}
-	
-/*	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Product> getProducts() {
-		return (new ProductsQuery()).execute();
-	}
-
-	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-	public Product getProduct(@PathVariable UUID productId) {
-		return (new ProductQuery()).
-			setProductId(productId).
-			execute();
-	}
-
-	@RequestMapping(value = "/byLookupCode/{productLookupCode}", method = RequestMethod.GET)
-	public Product getProductByLookupCode(@PathVariable String productLookupCode) {
-		return (new ProductByLookupCodeQuery()).
-			setLookupCode(productLookupCode).
-			execute();
-	}
-	
-	@RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
-	public Product updateProduct(@PathVariable UUID productId, @RequestBody Product product) {
-		return (new ProductUpdateCommand()).
-			setProductId(productId).
-			setApiProduct(product).
-			execute();
-	}
-	
-	@RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
-	public void deleteProduct(@PathVariable UUID productId) {
-		(new ProductDeleteCommand()).
-			setProductId(productId).
-			execute();
-	}*/
 }
