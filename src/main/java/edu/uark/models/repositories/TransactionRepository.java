@@ -20,7 +20,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
 					table(this.primaryTable).
-					fieldName(TransactionFieldNames.CASHIER_ID).
+					fieldName(TransactionFieldNames.RECORD_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
