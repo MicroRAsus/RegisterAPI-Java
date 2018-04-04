@@ -15,13 +15,17 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
-		this.count = rs.getInt(ProductFieldNames.COUNT);
+		this.quantity = rs.getInt(ProductFieldNames.QUANTITY);
+		this.price = rs.getDouble(ProductFieldNames.PRICE);
+		this.active = rs.getString(ProductFieldNames.ACTIVE);
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) { //put data into record to be updated
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
-		record.put(ProductFieldNames.COUNT, this.count);
+		record.put(ProductFieldNames.QUANTITY, this.quantity);
+		record.put(ProductFieldNames.PRICE, this.price);
+		record.put(ProductFieldNames.ACTIVE, this.active);
 		
 		return record;
 	}
@@ -39,22 +43,50 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 		return this;
 	}
 
-	private int count;
-	public int getCount() {
-		return this.count;
+	private int quantity;
+	public int getQuantity() {
+		return this.quantity;
 	}
-	public ProductEntity setCount(int count) {
-		if (this.count != count) {
-			this.count = count;
-			this.propertyChanged(ProductFieldNames.COUNT);
+	public ProductEntity setQuantity(int quantity) {
+		if (this.quantity != quantity) {
+			this.quantity = quantity;
+			this.propertyChanged(ProductFieldNames.QUANTITY);
+		}
+		
+		return this;
+	}
+	
+	private double price;
+	public double getPrice() {
+		return this.price;
+	}
+	public ProductEntity setPrice(double price) {
+		if (this.price != price) {
+			this.price = price;
+			this.propertyChanged(ProductFieldNames.PRICE);
+		}
+		
+		return this;
+	}
+	
+	private String active;
+	public String getActive() {
+		return this.active;
+	}
+	public ProductEntity setActive(String active) {
+		if (this.active != active) {
+			this.active = active;
+			this.propertyChanged(ProductFieldNames.ACTIVE);
 		}
 		
 		return this;
 	}
 	
 	public Product synchronize(Product apiProduct) {
-		this.setCount(apiProduct.getCount());
+		this.setQuantity(apiProduct.getQuantity());
 		this.setLookupCode(apiProduct.getLookupCode());
+		this.setPrice(apiProduct.getPrice());
+		this.setActive(apiProduct.getActive());
 		
 		apiProduct.setId(this.getId());
 		apiProduct.setCreatedOn(this.getCreatedOn());
@@ -65,14 +97,18 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	public ProductEntity() {
 		super(DatabaseTable.PRODUCT);
 		
-		this.count = -1;
+		this.quantity = -1;
 		this.lookupCode = StringUtils.EMPTY;
+		this.price = 1.00;
+		this.active = "F";
 	}
 	
 	public ProductEntity(Product apiProduct) {
 		super(DatabaseTable.PRODUCT);
 		
-		this.count = apiProduct.getCount();
+		this.quantity = apiProduct.getQuantity();
 		this.lookupCode = apiProduct.getLookupCode();
+		this.price = apiProduct.getPrice();
+		this.active = apiProduct.getActive();
 	}
 }

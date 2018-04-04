@@ -16,6 +16,7 @@ import edu.uark.commands.products.ProductDeleteCommand;
 import edu.uark.commands.products.ProductQuery;
 import edu.uark.commands.products.ProductUpdateCommand;
 import edu.uark.commands.products.ProductsQuery;
+import edu.uark.commands.products.ProductGetAllActiveProduct;
 import edu.uark.models.api.Product;
 
 @RestController
@@ -24,6 +25,11 @@ public class ProductRestController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Product> getProducts() {
 		return (new ProductsQuery()).execute();
+	}
+	
+	@RequestMapping(value = "/getAllActiveProduct", method = RequestMethod.GET)
+	public List<Product> getAllActiveProduct() {
+		return (new ProductGetAllActiveProduct()).execute();
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
