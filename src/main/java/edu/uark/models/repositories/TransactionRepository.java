@@ -18,14 +18,14 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
-					postgreFunction(PostgreFunctionType.LOWER).
+					postgreFunction(PostgreFunctionType.ANY).
 					table(this.primaryTable).
 					fieldName(TransactionFieldNames.RECORD_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, (Integer) recordid);
+					ps.setInt(1, recordid);
 				} catch (SQLException e) {}
 
 				return ps;
