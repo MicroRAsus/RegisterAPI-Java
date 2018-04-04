@@ -25,7 +25,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, recordid);
+					ps.setInt(1, recordid);
 				} catch (SQLException e) {}
 
 				return ps;
