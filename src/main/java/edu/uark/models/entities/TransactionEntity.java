@@ -33,7 +33,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		record.put(TransactionFieldNames.CASHIER_ID, this.cashierid);
 		record.put(TransactionFieldNames.AMOUNT, this.amount);
 		record.put(TransactionFieldNames.TRANS_TYPE, this.transtype);
-		if (this.referenceid != 0) {   //transactions cannot be 0, 0 is reserved for null value, which means this transaction record is a sell, so no reference id is provided.
+		if (this.referenceid > 0) {   //transactions cannot be less than 1, 0 and below are reserved for null value, which means this transaction record is a sell, so no reference id is provided.
 			record.put(TransactionFieldNames.REFERENCE_ID, this.referenceid);
 		}
 		

@@ -1,10 +1,6 @@
 package edu.uark.commands.transaction;
 
 import org.apache.commons.lang3.StringUtils;
-
-//import org.apache.commons.lang3.StringUtils;
-//import org.apache.commons.codec.digest.DigestUtils;
-//import java.util.Random;
 import edu.uark.commands.ResultCommandInterface;
 import edu.uark.controllers.exceptions.InvalidCredentialException;
 import edu.uark.controllers.exceptions.UnprocessableEntityException;
@@ -13,6 +9,7 @@ import edu.uark.models.repositories.TransactionRepository;
 import edu.uark.models.repositories.interfaces.TransactionRepositoryInterface;
 import edu.uark.models.api.TransactionConfirmation;
 import edu.uark.models.entities.EmployeeEntity;
+import edu.uark.models.entities.TransactionEntity;
 import edu.uark.models.repositories.EmployeeRepository;
 
 public class TransactionCreateCommand implements ResultCommandInterface<TransactionConfirmation> {
@@ -27,29 +24,22 @@ public class TransactionCreateCommand implements ResultCommandInterface<Transact
 		if (!employeeIDExist(this.transaction.getCashierID())) {
 			throw new InvalidCredentialException("Cashier ID");
 		}
-		if (this.transaction.getReferenceID() > 0)
-			//check reference id in transaction table.
-			
-		//generate next record id using new created count on transaction. fill in record id, then save.
-		//grab record id and created on and return them in confirmation class.
-		
-		if (!StringUtils.isNumeric(this.employee.getEmployeeID())) {
-			Random rand = new Random();
-			int newEmployeeID = rand.nextInt(10000);
-			while (employeeIDExist(Integer.toString(newEmployeeID))) {
-				newEmployeeID = rand.nextInt(10000);
+		if (this.transaction.getReferenceID() > 0) { //check reference id in transaction table.
+			if (this.transactionRepository.byRecordID(this.transaction.getReferenceID()) == null) {
+				throw new UnprocessableEntityException("Reference ID");
 			}
-			this.employee.setEmployeeID(Integer.toString(newEmployeeID));
 		}
 		
-		EmployeeEntity employeeEntity = new EmployeeEntity(employee);
-		employeeEntity.setPassWord(DigestUtils.sha1Hex(employeeEntity.getPassWord()));
-		employeeEntity.save();
+		//generate next record id using new created count on transaction. fill in record id, then save.
+		//grab record id and created on and return them in confirmation class.
+		int recordID = this.transactionRepository.countTransaction() + 1;
+		TransactionEntity transactionEntity = new TransactionEntity(this.transaction);
+		transactionEntity.setRecordID(recordID);
+		transactionEntity.save();
 		
-		this.employee.setId(employeeEntity.getId());
-		this.employee.setCreatedOn(employeeEntity.getCreatedOn());
-
-		return this.employee;
+		TransactionConfirmation transactionConfirmation = new TransactionConfirmation(recordID, transactionEntity.getCreatedOn());
+		
+		return transactionConfirmation;
 	}
 	
 	private boolean employeeIDExist(String employeeID) {
@@ -69,7 +59,16 @@ public class TransactionCreateCommand implements ResultCommandInterface<Transact
 		return this;
 	}
 	
-	public EmployeeCreateCommand() {
-		this.employeeRepository = new EmployeeRepository();
+	private TransactionRepositoryInterface transactionRepository;
+	public TransactionRepositoryInterface getTransactionRepository() {
+		return this.transactionRepository;
+	}
+	public TransactionCreateCommand setTransactionRepository(TransactionRepositoryInterface transactionRepository) {
+		this.transactionRepository = transactionRepository;
+		return this;
+	}
+	
+	public TransactionCreateCommand() {
+		this.transactionRepository = new TransactionRepository();
 	}
 }
