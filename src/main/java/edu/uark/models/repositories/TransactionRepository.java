@@ -18,7 +18,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
-					postgreFunction(PostgreFunctionType.ANY).
+					postgreFunction(PostgreFunctionType.NONE).
 					table(this.primaryTable).
 					fieldName(TransactionFieldNames.RECORD_ID).
 					comparison(SQLComparisonType.EQUALS)
