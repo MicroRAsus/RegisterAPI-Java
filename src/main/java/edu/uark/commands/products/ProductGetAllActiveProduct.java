@@ -23,12 +23,12 @@ public class ProductGetAllActiveProduct implements ResultCommandInterface<List<P
 	public ProductRepositoryInterface getProductRepository() {
 		return this.productRepository;
 	}
-	public ProductsQuery setProductRepository(ProductRepositoryInterface productRepository) {
+	public ProductGetAllActiveProduct setProductRepository(ProductRepositoryInterface productRepository) {
 		this.productRepository = productRepository;
 		return this;
 	}
 	
-	public ProductsQuery() {
+	public ProductGetAllActiveProduct() {
 		this.productRepository = new ProductRepository();
 	}
 }
