@@ -17,7 +17,9 @@ import edu.uark.commands.products.ProductQuery;
 import edu.uark.commands.products.ProductUpdateCommand;
 import edu.uark.commands.products.ProductsQuery;
 import edu.uark.commands.products.ProductGetAllActiveProduct;
+import edu.uark.commands.products.ProductQuantityUpdateCommand;
 import edu.uark.models.api.Product;
+import edu.uark.models.api.ProductQuantityUpdateStatus;
 
 @RestController
 @RequestMapping(value = "/api/product")
@@ -30,6 +32,13 @@ public class ProductRestController {
 	@RequestMapping(value = "/getAllActiveProduct", method = RequestMethod.GET)
 	public List<Product> getAllActiveProduct() {
 		return (new ProductGetAllActiveProduct()).execute();
+	}
+	
+	@RequestMapping(value = "/ProductQuantityUpdate", method = RequestMethod.POST)
+	public ProductQuantityUpdateStatus productQuantityUpdate(@RequestBody Product product) {
+		return (new ProductQuantityUpdateCommand()).
+			setApiProduct(product).
+			execute();
 	}
 
 	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
