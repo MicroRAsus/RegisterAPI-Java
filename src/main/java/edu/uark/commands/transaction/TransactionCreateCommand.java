@@ -25,7 +25,7 @@ public class TransactionCreateCommand implements ResultCommandInterface<Transact
 			throw new InvalidCredentialException("Cashier ID");
 		}
 		if (this.transaction.getReferenceID() > 0) { //check reference id in transaction table.
-			if (this.transactionRepository.byRecordID(this.transaction.getReferenceID()) == null) {
+			if (this.transactionRepository.byRecordID(this.transaction.getReferenceID(), "RECORD_ID") == null) {
 				throw new UnprocessableEntityException("Reference ID");
 			}
 		}

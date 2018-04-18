@@ -14,13 +14,13 @@ import edu.uark.models.repositories.interfaces.TransactionRepositoryInterface;
 
 public class TransactionRepository extends BaseRepository<TransactionEntity> implements TransactionRepositoryInterface {
 	@Override
-	public TransactionEntity byRecordID(int recordid) {
+	public TransactionEntity byRecordID(int recordid, String field) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.NONE).  //change postgre function to nonn so it doesn't modify my record id integer value in where statement.
 					table(this.primaryTable).
-					fieldName(TransactionFieldNames.RECORD_ID).
+					fieldName((field.equals("RECORD_ID")) ? TransactionFieldNames.RECORD_ID : TransactionFieldNames.REFERENCE_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
