@@ -29,7 +29,7 @@ public class EmployeeRestController {
 				execute();
 	}
 	
-	@RequestMapping(value = "/EmployeeCreate", method = RequestMethod.POST)
+	@RequestMapping(value = "/EmployeeCreate/", method = RequestMethod.POST)
 	public Employee createEmployee(@RequestBody Employee employee) {  //2.5 create employee endpoint
 		return (new EmployeeCreateCommand()).
 			setEmployee(employee).
